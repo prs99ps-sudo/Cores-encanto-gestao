@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cores & Encanto Gestão</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="topo">
+    <img src="logo-cores-encanto.jpg" alt="Cores & Encanto" class="logo">
+    <div>
+      <h1>Cores & Encanto Gestão</h1>
+      <p>Controle financeiro e comissões</p>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="active" onclick="abrirAba('dashboard')">Início</button>
+    <button onclick="abrirAba('atendimento')">Atendimento</button>
+    <button onclick="abrirAba('caixa')">Entradas/Saídas</button>
+    <button onclick="abrirAba('relatorios')">Relatórios</button>
+    <button onclick="abrirAba('cadastros')">Cadastros</button>
+  </nav>
+
+  <main>
+    <section id="dashboard" class="aba ativa">
+      <h2>Resumo</h2>
+      <div class="cards">
+        <div class="card"><span>Produção total</span><strong id="dashProducao">R$ 0,00</strong></div>
+        <div class="card"><span>Comissões</span><strong id="dashComissao">R$ 0,00</strong></div>
+        <div class="card"><span>Entradas</span><strong id="dashEntradas">R$ 0,00</strong></div>
+        <div class="card"><span>Saídas</span><strong id="dashSaidas">R$ 0,00</strong></div>
+        <div class="card destaque"><span>Saldo empresa</span><strong id="dashSaldo">R$ 0,00</strong></div>
+      </div>
+    </section>
+
+    <section id="atendimento" class="aba">
+      <h2>Novo Atendimento</h2>
+      <form id="formAtendimento">
+        <label>Data <input type="date" id="dataAtendimento" required></label>
+        <label>Profissional <select id="profissional" required></select></label>
+        <label>Serviço <select id="servico" required></select></label>
+        <label>Valor cheio <input type="number" id="valorServico" step="0.01" required></label>
+        <label>Forma de pagamento
+          <select id="pagamento">
+            <option>Dinheiro</option><option>Pix</option><option>Débito</option><option>Crédito</option><option>Outro</option>
+          </select>
+        </label>
+        <label>Observação <input type="text" id="obsAtendimento"></label>
+        <button type="submit">Salvar atendimento</button>
+      </form>
+      <h3>Atendimentos lançados</h3>
+      <div id="listaAtendimentos" class="lista"></div>
+    </section>
+
+    <section id="caixa" class="aba">
+      <h2>Entradas e Saídas</h2>
+      <form id="formCaixa">
+        <label>Data <input type="date" id="dataCaixa" required></label>
+        <label>Tipo <select id="tipoCaixa"><option>Entrada</option><option>Saída</option></select></label>
+        <label>Categoria <input type="text" id="categoriaCaixa" placeholder="Ex: aluguel, material, venda produto" required></label>
+        <label>Valor <input type="number" id="valorCaixa" step="0.01" required></label>
+        <label>Observação <input type="text" id="obsCaixa"></label>
+        <button type="submit">Salvar lançamento</button>
+      </form>
+      <h3>Lançamentos do caixa</h3>
+      <div id="listaCaixa" class="lista"></div>
+    </section>
+
+    <section id="relatorios" class="aba">
+      <h2>Relatórios</h2>
+      <div class="filtros">
+        <label>Início <input type="date" id="relInicio"></label>
+        <label>Fim <input type="date" id="relFim"></label>
+        <button onclick="gerarRelatorios()">Atualizar relatório</button>
+      </div>
+
+      <div class="relatorio" id="relComissoes"></div>
+      <button onclick="imprimirRelatorio('comissoes')">Gerar PDF - Comissões</button>
+
+      <div class="relatorio" id="relProprietario"></div>
+      <button onclick="imprimirRelatorio('proprietario')">Gerar PDF - Proprietário</button>
+    </section>
+
+    <section id="cadastros" class="aba">
+      <h2>Cadastros</h2>
+      <div class="grid2">
+        <div>
+          <h3>Profissionais</h3>
+          <form id="formProf">
+            <input id="nomeProf" placeholder="Nome da profissional" required>
+            <input id="comissaoProf" type="number" value="50" step="1" required>
+            <button>Adicionar</button>
+          </form>
+          <div id="listaProf" class="lista"></div>
+        </div>
+        <div>
+          <h3>Serviços</h3>
+          <form id="formServ">
+            <input id="nomeServ" placeholder="Nome do serviço" required>
+            <input id="valorServ" type="number" step="0.01" placeholder="Valor" required>
+            <button>Adicionar</button>
+          </form>
+          <div id="listaServ" class="lista"></div>
+        </div>
+      </div>
+      <button class="perigo" onclick="limparTudo()">Apagar todos os dados</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

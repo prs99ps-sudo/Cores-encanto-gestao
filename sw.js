@@ -1,0 +1,1 @@
+self.addEventListener('install',e=>{e.waitUntil(caches.open('cores-v1').then(c=>c.addAll(['./','index.html','style.css','app.js','manifest.json','logo-cores-encanto.jpg'])))});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))})

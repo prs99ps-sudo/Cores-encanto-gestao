@@ -1,0 +1,15 @@
+{
+  "name": "Cores & Encanto Gestão",
+  "short_name": "Cores Gestão",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff6fa",
+  "theme_color": "#d62d79",
+  "icons": [
+    {
+      "src": "logo-cores-encanto.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
